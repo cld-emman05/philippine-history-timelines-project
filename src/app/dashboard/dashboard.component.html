@@ -6,9 +6,10 @@
         <div class='card my-3 align-items-stretch'>
             <div class="card-header">
                 <h1 class="card-title">Articles</h1>
-                <button class="btn btn-outline-primary float-end" routerLink="/add-article" *ngIf="auth.user | async as user">
-                        Add
-                    </button>
+                <button class="btn btn-outline-primary float-end" routerLink="/add-article"
+                    *ngIf="auth.user | async as user">
+                    Add
+                </button>
             </div>
             <div class=" card-body ">
                 <ul class="list-group ">
@@ -27,14 +28,17 @@
                             <small class='text-start text-{{article.color}}'>
                                 {{article.action}} {{ article.timestamp?.toDate() | date: 'MM/dd/yyyy, h:mm:ss a' }}
                             </small>
+                            <small class='text-start text-secondary' *ngIf="article.submittedBy">
+                                by {{article.submittedBy}}
+                            </small>
                         </div>
                         <div class="btn-group float-end " *ngIf="auth.user | async as user">
                             <button class="btn btn-outline-secondary " (click)="editArticle(article.id) ">
-                                    Edit
-                                </button>
+                                Edit
+                            </button>
                             <button class="btn btn-outline-danger " (click)="delArticle(article.id) ">
-                                    Delete
-                                </button>
+                                Delete
+                            </button>
                         </div>
                     </li>
                 </ul>
@@ -54,8 +58,8 @@
         <div class="card my-3 ">
             <div class="card-header ">
                 <h1 class="card-title ">Latest Events Posted</h1>
-                <a class="btn btn-outline-primary float-end " routerLink="/add-event " *ngIf="auth.user | async as user">
-                        Add
+                <a class="btn btn-outline-primary float-end " routerLink="/add-event" *ngIf="auth.user | async as user">
+                    Add
                 </a>
             </div>
 
@@ -63,33 +67,43 @@
                 <ul class="list-group " *ngIf="events.length> 0">
                     <li class=" list-group-item " *ngFor="let event of events ">
                         <h6 class="card-subtitle content ">Event Name: {{event.name}}</h6>
-                        <h6 class="card-subtitle content ">Event Year: {{event.year }} {{event.era}}</h6>
-                        <h6 class="card-subtitle content ">Event Month: {{event.month}}</h6>
+                        <h6 class="card-subtitle content">Starting Period: {{event.startPeriod.month}}
+                            {{event.startPeriod.year}}
+                            {{event.startPeriod.era}}</h6>
+                        <h6 class="card-subtitle content" *ngIf="event.endPeriod">Ending Period:
+                            {{event.endPeriod.month}}
+                            {{event.endPeriod.year }} {{event.endPeriod.era}}</h6>
 
-                        <h6 class="card-subtitle content ">Event Tag Cloud: {{event.tags}}
+                        <h6 class="card-subtitle content " *ngIf="event.tags">Event Tag Cloud: {{event.tags}}
                         </h6>
-                        <h6 class="card-subtitle content ">Event Description: {{event.description}}</h6>
-                        <h6 class="card-subtitle content ">Event Relevant Link:
+                        <h6 class="card-subtitle content " *ngIf="event.description">
+                            Event Description: <i>{{event.description | slice: 0:30}}</i>
+                        </h6>
+                        <h6 class="card-subtitle content " *ngIf="event.relLink">Event Relevant Link:
                             <a href="{{event.relLink}} ">{{event.relLink}}</a>
                         </h6>
-                        <h6 class="card-subtitle content ">Event Image Link:
-                            <a href="{{event.relLink}} ">{{event.imgLink}}</a>
+                        <h6 class="card-subtitle content " *ngIf="event.imgLink">Event Image Link:
+                            <a href="{{event.imgLink}} ">{{event.imgLink}}</a>
                         </h6>
 
                         <div class='text-end'>
                             <small class='text-start text-{{event.color}}'>
                                 {{event.action}} {{ event.timestamp?.toDate() | date: 'MM/dd/yyyy, h:mm:ss a' }}
+
+                            </small>
+                            <small class='text-start text-secondary' *ngIf="event.submittedBy">
+                                by {{event.submittedBy}}
                             </small>
                         </div>
 
 
                         <div class=" btn-group float-end m-3 " *ngIf="auth.user | async as user">
-                            <button class="btn btn-outline-secondary " (click)="editEvent(event.id) ">
-                                    Edit
-                                </button>
-                            <button class="btn btn-outline-danger " title="Delete " (click)="delEvent(event.id) ">
-                                    Delete
-                                </button>
+                            <button class="btn btn-outline-secondary " (click)="editEvent(event)">
+                                Edit
+                            </button>
+                            <button class="btn btn-outline-danger " title="Delete " (click)="delEvent(event) ">
+                                Delete
+                            </button>
                         </div>
                     </li>
                 </ul>
@@ -108,15 +122,23 @@
                 <ul class="list-group ">
                     <li class="list-group-item ">
                         <p class="card-subtitle content ">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum. "
                         </p>
                         <p class="text-end text-info ">Yesterday</p>
                     </li>
                     <li class="list-group-item ">
                         <p class="card-subtitle content ">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum. "
                         </p>
                         <p class="text-end text-info ">1 week ago</p>
                     </li>

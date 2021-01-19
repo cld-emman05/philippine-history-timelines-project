@@ -11,6 +11,9 @@ import { FamousTagsComponent } from './famous-tags/famous-tags.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddArticleComponent } from './dashboard/modals/add-article/add-article.component';
 import { AddEventComponent } from './dashboard/modals/add-event/add-event.component';
+import { ReactiveFormsModule } from "@angular/forms";
+import { CKEditorModule } from 'ckeditor4-angular';
+import { EditEventComponent } from './dashboard/modals/edit-event/edit-event.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +23,16 @@ import { AddEventComponent } from './dashboard/modals/add-event/add-event.compon
     FamousTagsComponent,
     PageNotFoundComponent,
     AddArticleComponent,
-    AddEventComponent
+    AddEventComponent,
+    EditEventComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    CKEditorModule,
+    ReactiveFormsModule
   ],
   providers: [
     Title
