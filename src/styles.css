@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&display=swap');
+html * {
+    font-family: 'Averia Serif Libre', cursive !important;
+}
+
+.logo {
+    height: 1in;
+    width: 1in;
+}
+
+.active {
+    background: linear-gradient(180deg, #0038A8 10%, rgba(201, 152, 104, 1) 80%, #CE1126 10%);
+    color: #000;
+}
+
+.tl-highlight-img {
+    height: 50px;
+    width: 50px;
+}
+
+.bg-native {
+    background-color: #c99868 !important;
+}
+
+.content {
+    margin-top: 3pt;
+    margin-bottom: 3pt;
+    text-align: left;
+}

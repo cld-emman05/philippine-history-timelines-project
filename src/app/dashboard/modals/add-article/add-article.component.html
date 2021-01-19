@@ -1,0 +1,61 @@
+<div class="align-self-center m-3">
+    <div class="card">
+        <div class="card-header  d-inline-flex">
+            <a href="/" class="btn btn-sm btn-outline-secondary" title="Back to Dashboard"><i class="bi bi-backspace"></i></a>
+            <h5 class="card-title ms-2" id="examplecardLabel">Add Article</h5>
+        </div>
+
+        <div class="card-body">
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="artTitle" aria-describedby="articleTitle" placeholder="Article 1">
+                <label class="form-label" for="artTitle">Article Title</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="timeLabel" aria-describedby="timeLabel" placeholder="Timeline Label">
+                <label class="form-label" for="artTitle">Timeline Label</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="timeFullName" aria-describedby="timeFullName" placeholder="Timeline Full Name">
+                <label class="form-label" for="timeFullName">Timeline Full Name</label>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="timeDesc">Timeline Description</label>
+                <textarea class="form-control txtarea" id="timeDesc" aria-describedby="timeDesc" placeholder="Timeline Label"></textarea>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="timeTags" aria-describedby="timeTags" placeholder="Timeline Tags">
+                <label class="form-label" for="timeTags">Timeline Tags</label>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="timeDesc">Timeline Narratives</label>
+                <textarea class="form-control txtarea" id="timeDesc" aria-describedby="timeDesc" placeholder="Timeline Label"></textarea>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="timePara">Timeline Paragraphs</label>
+                <textarea class="form-control txtarea" id="timePara" aria-describedby="articleTitle" placeholder="Timeline Paragraphs"></textarea>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="timeRelLink" aria-describedby="articleTitle" placeholder="Timeline Relevant Link">
+                <label class="form-label" for="timeRelLink">Timeline Relevant Link</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="timeImgLink" aria-describedby="articleTitle" placeholder="Timeline Image Link">
+                <label class="form-label" for="timeImgLink">Timeline Image Link</label>
+            </div>
+        </div>
+        <div class="card-footer ms-auto">
+            <button type="reset" class="btn btn-light">Reset</button>
+            <button type="button" (click)='add()' class="btn btn-primary">Add Article</button>
+        </div>
+    </div>
+</div>

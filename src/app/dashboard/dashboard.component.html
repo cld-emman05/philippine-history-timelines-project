@@ -1,0 +1,142 @@
+<!-- Body -->
+<div class="row">
+
+    <!-- Main Articles -->
+    <div class="col">
+        <div class='card my-3 align-items-stretch'>
+            <div class="card-header">
+                <h1 class="card-title">Articles</h1>
+                <button class="btn btn-outline-primary float-end" routerLink="/add-article" *ngIf="auth.user | async as user">
+                        Add
+                    </button>
+            </div>
+            <div class=" card-body ">
+                <ul class="list-group ">
+                    <li class="list-group-item " *ngFor="let article of articles ">
+                        <h2 class="card-title ">Article 1</h2>
+                        <h6 class="card-subtitle content ">Timeline Label: {{article.label}}</h6>
+                        <h6 class="card-subtitle content ">Timeline Full Name: {{article.fullname}}</h6>
+                        <h6 class="card-subtitle content ">Timeline Description: {{article.description}}</h6>
+                        <h6 class="card-subtitle content ">Timeline Tag: {{article.tag}}</h6>
+                        <h6 class="card-subtitle content ">Timeline Narrative: {{article.narrative}}</h6>
+                        <h6 class="card-subtitle content ">Timeline Paragraphs: {{article.paragraphs}}
+                        </h6>
+                        <h6 class="card-subtitle content ">Timeline Relevant Link: {{article.relLink}}</h6>
+                        <h6 class="card-subtitle content ">Timeline Image Link: {{article.imgLink}}</h6>
+                        <div class='text-end'>
+                            <small class='text-start text-{{article.color}}'>
+                                {{article.action}} {{ article.timestamp?.toDate() | date: 'MM/dd/yyyy, h:mm:ss a' }}
+                            </small>
+                        </div>
+                        <div class="btn-group float-end " *ngIf="auth.user | async as user">
+                            <button class="btn btn-outline-secondary " (click)="editArticle(article.id) ">
+                                    Edit
+                                </button>
+                            <button class="btn btn-outline-danger " (click)="delArticle(article.id) ">
+                                    Delete
+                                </button>
+                        </div>
+                    </li>
+                </ul>
+                <h6 class="text-center " *ngIf='articles.length === 0'>No articles posted</h6>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- End Main Articles -->
+
+    <!-- Latest events and Twitter-->
+    <div class="col ">
+        <div class="card my-3 ">
+            <div class="card-header ">
+                <h1 class="card-title ">Latest Events Posted</h1>
+                <a class="btn btn-outline-primary float-end " routerLink="/add-event " *ngIf="auth.user | async as user">
+                        Add
+                </a>
+            </div>
+
+            <div class="card-body ">
+                <ul class="list-group " *ngIf="events.length> 0">
+                    <li class=" list-group-item " *ngFor="let event of events ">
+                        <h6 class="card-subtitle content ">Event Name: {{event.name}}</h6>
+                        <h6 class="card-subtitle content ">Event Year: {{event.year }} {{event.era}}</h6>
+                        <h6 class="card-subtitle content ">Event Month: {{event.month}}</h6>
+
+                        <h6 class="card-subtitle content ">Event Tag Cloud: {{event.tags}}
+                        </h6>
+                        <h6 class="card-subtitle content ">Event Description: {{event.description}}</h6>
+                        <h6 class="card-subtitle content ">Event Relevant Link:
+                            <a href="{{event.relLink}} ">{{event.relLink}}</a>
+                        </h6>
+                        <h6 class="card-subtitle content ">Event Image Link:
+                            <a href="{{event.relLink}} ">{{event.imgLink}}</a>
+                        </h6>
+
+                        <div class='text-end'>
+                            <small class='text-start text-{{event.color}}'>
+                                {{event.action}} {{ event.timestamp?.toDate() | date: 'MM/dd/yyyy, h:mm:ss a' }}
+                            </small>
+                        </div>
+
+
+                        <div class=" btn-group float-end m-3 " *ngIf="auth.user | async as user">
+                            <button class="btn btn-outline-secondary " (click)="editEvent(event.id) ">
+                                    Edit
+                                </button>
+                            <button class="btn btn-outline-danger " title="Delete " (click)="delEvent(event.id) ">
+                                    Delete
+                                </button>
+                        </div>
+                    </li>
+                </ul>
+
+                <h6 class="text-center " *ngIf='events.length === 0'>No events posted</h6>
+            </div>
+        </div>
+
+        <div class="card my-3 ">
+            <div class="card-header ">
+                <h1 class="card-title ">
+                    <i class="bi bi-twitter "></i> Me on Twitter
+                </h1>
+            </div>
+            <div class="card-body ">
+                <ul class="list-group ">
+                    <li class="list-group-item ">
+                        <p class="card-subtitle content ">
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
+                        </p>
+                        <p class="text-end text-info ">Yesterday</p>
+                    </li>
+                    <li class="list-group-item ">
+                        <p class="card-subtitle content ">
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. "
+                        </p>
+                        <p class="text-end text-info ">1 week ago</p>
+                    </li>
+                    <card-footer class="text-end ">
+                        <a class="card-subtitle content " href='#more'>More</a>
+                    </card-footer>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Tag Cloud -->
+<div class="row p-3 ">
+    <div class="card ">
+        <div class="card-body text-center ">
+            <h2 class="card-title ">Tag Cloud</h2>
+        </div>
+    </div>
+</div>

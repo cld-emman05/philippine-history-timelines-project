@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "philippine-history-timelines": {
+      "hosting": {
+        "PHTimelines": [
+          "philippine-history-timelines"
+        ]
+      }
+    }
+  }
+}
