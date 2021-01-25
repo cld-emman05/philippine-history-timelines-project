@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,7 @@ export class DashboardComponent
   implements OnInit {
   events: any[] = [];
   articles: any[] = [];
-  constructor(private afs: AngularFirestore, public auth: AngularFireAuth) { }
+  constructor(private afs: AngularFirestore, public auth: AngularFireAuth, private router: Router) { }
 
   ngOnInit(): void {
     this.afs.collection(`Events`, filter => filter.orderBy('timestamp', 'desc')).snapshotChanges().subscribe(
@@ -37,16 +38,21 @@ export class DashboardComponent
       });
   }
 
+  monthToString(index: any) {
+    if (index) {
+      return new Date(-1, index, -1).toLocaleDateString("en", { month: "long" })
+    }
+    else {
+      return null
+    }
+  }
+
   editEvent(event: any) {
-    this.afs.doc(`Events/${event.id}`).update({
-      color: 'info',
-      action: 'Updated on',
-      timestamp: new Date()
-    });
+    this.router.navigate(['/edit-event', event.id]);
   }
 
   delEvent(event: any) {
-    this.afs.doc(`Events/${event.id}`).delete();
+    this.router.navigate(['/del-event', event.id]);
   }
 
   editArticle(id: string) {

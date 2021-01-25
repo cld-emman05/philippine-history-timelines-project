@@ -2,7 +2,7 @@
 <div class="row">
 
     <!-- Main Articles -->
-    <div class="col">
+    <div class="col-6">
         <div class='card my-3 align-items-stretch'>
             <div class="card-header">
                 <h1 class="card-title">Articles</h1>
@@ -54,7 +54,7 @@
     <!-- End Main Articles -->
 
     <!-- Latest events and Twitter-->
-    <div class="col ">
+    <div class="col-6">
         <div class="card my-3 ">
             <div class="card-header ">
                 <h1 class="card-title ">Latest Events Posted</h1>
@@ -67,23 +67,28 @@
                 <ul class="list-group " *ngIf="events.length> 0">
                     <li class=" list-group-item " *ngFor="let event of events ">
                         <h6 class="card-subtitle content ">Event Name: {{event.name}}</h6>
-                        <h6 class="card-subtitle content">Starting Period: {{event.startPeriod.month}}
-                            {{event.startPeriod.year}}
-                            {{event.startPeriod.era}}</h6>
+                        <h6 class="card-subtitle content">Starting Period: {{ monthToString(event.startPeriod.month) }}
+                            {{event.startPeriod.day}}<small *ngIf='event.startPeriod.day'>,</small>
+                            {{event.startPeriod.year}}</h6>
                         <h6 class="card-subtitle content" *ngIf="event.endPeriod">Ending Period:
-                            {{event.endPeriod.month}}
-                            {{event.endPeriod.year }} {{event.endPeriod.era}}</h6>
+                            {{ monthToString(event.endPeriod.month) }} {{event.endPeriod.day }}<small
+                                *ngIf='event.endPeriod.day'>,</small>
+                            {{event.endPeriod.year }}</h6>
 
-                        <h6 class="card-subtitle content " *ngIf="event.tags">Event Tag Cloud: {{event.tags}}
+                        <h6 class="card-subtitle content" *ngIf="event.tags">Event Tag Cloud: {{event.tags}}
                         </h6>
-                        <h6 class="card-subtitle content " *ngIf="event.description">
-                            Event Description: <i>{{event.description | slice: 0:30}}</i>
+                        <h6 class="card-subtitle content text-wrap" *ngIf="event.description">
+                            Event Description: <i>{{event.description | slice: 0:95}}</i><a href='#'
+                                *ngIf='event.description.length > 95' title="{{ event.description}} ">
+                                [...]</a>
                         </h6>
                         <h6 class="card-subtitle content " *ngIf="event.relLink">Event Relevant Link:
-                            <a href="{{event.relLink}} ">{{event.relLink}}</a>
+                            <a href="{{event.relLink}} " title="{{event.relLink}} " target="_blank">{{event.relLink |
+                                slice: 0:95}}</a>
                         </h6>
                         <h6 class="card-subtitle content " *ngIf="event.imgLink">Event Image Link:
-                            <a href="{{event.imgLink}} ">{{event.imgLink}}</a>
+                            <a href="{{event.imgLink}}" title="{{event.imgLink}} " target="_blank">{{event.imgLink |
+                                slice: 0:95}}</a>
                         </h6>
 
                         <div class='text-end'>

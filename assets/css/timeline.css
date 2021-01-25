@@ -63,9 +63,9 @@
   height: 100%;
   transition: transform 1s cubic-bezier(0.455, 0.03, 0.515, 0.955); }
   .timeline-horizontal .timeline-dots {
-    background: url(../img/timeline-bg.png) bottom repeat-x; }
+    background: url("../img/timeline-bg.png") bottom repeat-x; }
   .timeline-vertical .timeline-dots {
-    background: url(../img/timeline-vertical-bg.png) left repeat-y; }
+    background: url("../img/timeline-vertical-bg.png") left repeat-y; }
   .timeline-dots li {
     transition: all 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);
     list-style: none;

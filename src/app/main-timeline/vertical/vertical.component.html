@@ -1,0 +1,47 @@
+<h3>Main Timeline</h3>
+
+<div class='row align-self-center m-3'>
+    <mzd-timeline [alternateSide]='true' *ngFor="let event of events">
+        <mzd-timeline-content [border]="true" [card]="false">
+            <div class=" card-header bg-native">
+                <small class="card-subtitle text-light">{{ monthToString(event.startPeriod.month) }}
+                    {{event.startPeriod.day}}<small *ngIf='event.startPeriod.day'>,</small>
+                    {{event.startPeriod.year}}
+                    <small *ngIf="!(!event.endPeriod.year)">to</small>
+                    {{ monthToString(event.endPeriod.month) }}
+                    {{event.endPeriod.day}}<small *ngIf='event.endPeriod.day'>,</small>
+                    {{event.endPeriod.year}}
+                </small>
+
+                <h6 class="card-title ">{{event.name}}</h6>
+            </div>
+            <div class="card-body" *ngIf='show'>
+                <p>
+                    {{event.description}}
+                </p>
+                <ul class='list-group small m-3'>
+                    <li class="list-group-item card-subtitle bg-info">Relevant Links</li>
+                    <a class="list-group-item" href="#link1">Link 1</a>
+                    <a class="list-group-item" href="#link1">Link 2</a>
+                    <a class="list-group-item" href="#link1">Link 3</a>
+                    <a class="list-group-item" href="#link1">Link 4</a>
+                    <a class="list-group-item" href="#link1">Link 5</a>
+                </ul>
+            </div>
+            <div class='card-footer text-end'>
+                <div class="btn-group">
+                    <a href="https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTU3ODc5MDg1MzYxODAwNTIx/portrait-of-ferdinand-magellan.jpg"
+                        class="btn btn-sm btn-info" title='Open Image Link'>
+                        View Image link
+                    </a>
+                </div>
+            </div>
+            <mzd-icon>
+                <i style="display: flex; height: fit-content;" (click)='toggle()' class="{{icon}}"
+                    title='{{status}} the entry'></i>
+            </mzd-icon>
+        </mzd-timeline-content>
+
+    </mzd-timeline>
+
+</div>

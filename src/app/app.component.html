@@ -1,13 +1,12 @@
-<title>Philippine History Timeline</title>
-
 <!-- Navigation Bar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-native shadow">
     <div class="container-fluid">
         <img src="assets/img/philippines.png" alt="Philippine History Timelines" class="d-inline-block align-top logo">
         <a class="navbar-brand" routerLink="/">History Timeline</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button>
+        </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -30,11 +29,12 @@
 
                 </li>
                 <li class="nav-item dropdown" *ngIf="auth.user | async as user; else showLogin">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ user.displayName }}
-                </a>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.displayName }}
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item">{{ user.displayName  }}</a></li>
+                        <li><a class="dropdown-item">{{ user.displayName }}</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -63,7 +63,9 @@
 <footer class="mt-4">
     <nav class="navbar fixed-bottom navbar-dark bg-native">
         <div class="container-fluid">
-            <div class="text-end"><small>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></small></div>
+            <div class="text-end"><small>Icons made by <a href="https://www.flaticon.com/authors/freepik"
+                        title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"
+                        title="Flaticon">www.flaticon.com</a></small></div>
         </div>
     </nav>
 </footer>

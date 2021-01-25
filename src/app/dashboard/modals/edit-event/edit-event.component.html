@@ -1,1 +1,106 @@
-<p>Working!</p>
+<form [formGroup]='this.form'>
+    <div class="align-self-center m-3">
+        <div class="card">
+            <div class="card-header d-inline-flex">
+                <a href="/" class="btn btn-sm btn-outline-secondary" title="Back to Dashboard"><i
+                        class="bi bi-backspace"></i></a>
+                <h5 class="card-title ms-2">Edit Event</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="eventName" aria-describedby="articleTitle"
+                        placeholder="Event Name" formControlName="eventName" ng-required='true'>
+                    <label class="form-label" for="eventName">Event Name</label>
+                </div>
+
+                <label class='form-label'>Start Date</label>
+                <div class="input-group mb-3">
+                    <div class="form-floating col">
+                        <input type="text" pattern="\d*" min='0' maxlength='4' class="form-control" id="eventStartYear"
+                            aria-describedby="eventStartYear" placeholder="Year" formControlName="eventStartYear"
+                            ng-required='true' (keyup)="this.startYear = $event.target.value">
+                        <label class="form-label" for="eventName">Year</label>
+                    </div>
+                    <div class="form-floating col">
+                        <select class="form-select" id="eventStartMonth" aria-describedby="eventStartMonth"
+                            placeholder="Month" formControlName="eventStartMonth"
+                            (change)="getStartDay($event.target.value)">
+                            <option value='' selected>--</option>
+                            <option *ngFor="let month of startMonths" value="{{month.id}}">{{month.name}}</option>
+                        </select>
+
+                        <label class="form-label" for="eventStartDate">Month</label>
+                    </div>
+                    <div class="form-floating col">
+                        <select class="form-select" id="eventStartDay" aria-describedby="eventStartDay"
+                            placeholder="Day" formControlName="eventStartDay" data-ng-show="eventStartYear">
+                            <option value='' selected>--</option>
+                            <option *ngFor="let day of startDays" value="{{day}}">{{day}}</option>
+                        </select>
+
+                        <label class="form-label" for="eventStartDate">Day</label>
+                    </div>
+                </div>
+
+                <label class='form-label'>End Date</label>
+                <div class="input-group mb-3">
+                    <div class="form-floating col">
+                        <input type="text" pattern="\d*" min='0' maxlength='4' class="form-control" id="eventEndYear"
+                            aria-describedby="eventEndYear" placeholder="Year" formControlName="eventEndYear"
+                            ng-required='true' (keyup)="viewEndMonth($event.target.value)"
+                            (keyup)="this.endYear = $event.target.value">
+                        <label class="form-label" for="eventName">Year</label>
+                    </div>
+                    <div class="form-floating col">
+                        <select class="form-select" id="eventEndMonth" aria-describedby="eventEndMonth"
+                            placeholder="Month" formControlName="eventEndMonth"
+                            (change)="getEndDay($event.target.value)">
+                            <option value='' selected>--</option>
+                            <option *ngFor="let month of endMonths" value="{{month.id}}">{{month.name}}</option>
+                        </select>
+
+                        <label class="form-label" for="eventEndDate">Month</label>
+                    </div>
+                    <div class="form-floating col">
+                        <select class="form-select" id="eventEndDay" aria-describedby="eventEndDay" placeholder="Day"
+                            formControlName="eventEndDay" data-ng-show="eventEndYear">
+                            <option value='' selected>--</option>
+                            <option *ngFor="let day of endDays" value="{{day}}">{{day}}</option>
+                        </select>
+
+                        <label class="form-label" for="eventEndDate">Day</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label " for="eventDesc">Event Description</label>
+                    <textarea id="eventDesc" class="form-control" aria-describedby="Event Description"
+                        formControlName="eventDesc" appTextareaAutoresize>
+                    </textarea>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="eventTagCloud" aria-describedby="timeTo"
+                        placeholder="eventTagCloud" formControlName="eventTagCloud">
+                    <label class="form-label" for="eventTagCloud">Event Tag Cloud</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="url" class="form-control" id="eventRelLink" aria-describedby="Event Relevabnt Link"
+                        placeholder="Timeline Relevant Link" formControlName="eventRelLink">
+                    <label class="form-label" for="eventRelLink">Event Relevant Link</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="url" class="form-control" id="eventImgLink" aria-describedby="Event Image Link"
+                        placeholder="Event Image Link" formControlName="eventImgLink">
+                    <label class="form-label" for="timeImgLink">Event Image Link</label>
+                </div>
+            </div>
+            <div class="card-footer text-end">
+                <button type="reset" class="btn btn-light">Reset</button>
+                <button (click)="edit()" class="btn btn-primary" ng-disabled="someForm.$invalid">Edit Event</button>
+            </div>
+        </div>
+    </div>
+</form>

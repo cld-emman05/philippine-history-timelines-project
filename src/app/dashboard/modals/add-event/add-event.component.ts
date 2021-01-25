@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Month } from '../month';
 
 
 @Component({
@@ -13,51 +14,120 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AddEventComponent implements OnInit {
   constructor(private afs: AngularFirestore, private router: Router, public auth: AngularFireAuth) { }
   date = new Date();
-  Era: any = [{
-    'name': 'BCE', 'description': 'Before Common Era/Before Christ (BC): pertaining to the period before Christ\'s birth'
-  }, {
-    'name': 'CE', 'description': 'Common Era/Anno Domini (AD): pertaining period after Christ\'s birth to the present day'
-  }];
-  Month: any = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
-    'September', 'October', 'November', 'December'];
+  startMonth: any;
+  startYear: any;
+  startDay: any;
+
+  endMonth: any;
+  endYear: any;
+  endDay: any;
+  hide: boolean = true;
+  hideEd: boolean = true;
+  startDays: any = [];
+  endDays: any = [];
+
+
+  startMonths = Array.from({ length: 12 }, (e, i) => {
+    return {
+      id: i + 1,
+      name: new Date(-1, i + 1, -1).toLocaleDateString("en", { month: "long" })
+    }
+  })
+
+  endMonths = Array.from({ length: 12 }, (e, i) => {
+    return {
+      id: i + 1,
+      name: new Date(-1, i + 1, -1).toLocaleDateString("en", { month: "long" })
+    }
+  })
 
   user: any;
 
   ngOnInit(): void {
     this.auth.user.subscribe(info => {
-      this.user = info?.displayName;
+      if (info) {
+        this.user = info?.displayName;
+      }
+      else {
+        this.router.navigate(['/']).then(data => {
+          alert('You must login first')
+        })
+      }
     })
-
   }
+
 
   form = new FormGroup({
     eventName: new FormControl('', Validators.required),
     eventStartYear: new FormControl('', Validators.required),
-    eventStartYearEra: new FormControl('', Validators.required),
-    eventStartMonth: new FormControl('', Validators.required),
+    eventStartMonth: new FormControl(''),
+    eventStartDay: new FormControl(''),
     eventEndYear: new FormControl(''),
-    eventEndYearEra: new FormControl(''),
     eventEndMonth: new FormControl(''),
+    eventEndDay: new FormControl(''),
     eventDesc: new FormControl(''),
     eventTagCloud: new FormControl(''),
     eventRelLink: new FormControl('http://'),
     eventImgLink: new FormControl('http://')
   });
 
+  viewStartMonth(input: any) {
+    if (input) {
+      this.hide = false
+      this.startYear = input;
+    }
+    else {
+      this.hide = true
+    }
+  }
+
+  getStartDay(month: any) {
+    this.startMonth = month;
+    this.startDay = new Date(this.startYear, month, 0).getDate();
+
+    this.startDays = Array.from({ length: this.startDay }, (e, i) => {
+      return i + 1;
+    })
+  }
+
+  viewEndMonth(input: any) {
+    if (input) {
+      this.hideEd = false
+      this.endYear = input;
+    }
+    else {
+      this.hideEd = true
+    }
+  }
+
+  getEndDay(month: any) {
+    this.endMonth = month;
+    this.endDay = new Date(this.endYear, month, 0).getDate();
+
+    this.endDays = Array.from({ length: this.endDay }, (e, i) => {
+      return i + 1;
+    })
+  }
+
   add() {
-    let name = this.form.value.eventName;
     let startPeriod = {
-      year: this.form.value.eventStartYear,
-      era: this.form.value.eventStartYearEra,
       month: this.form.value.eventStartMonth,
-    };
+      day: this.form.value.eventStartDay,
+      year: this.form.value.eventStartYear,
+    }
+
     let endPeriod = {
-      year: this.form.value.eventEndYear,
-      era: this.form.value.eventEndYearEra,
       month: this.form.value.eventEndMonth,
+      day: this.form.value.eventEndDay,
+      year: this.form.value.eventEndYear,
     };
+
+    let name = this.form.value.eventName;
+    console.log(this.form.value.eventStartDate);
+
+
     let description = this.form.value.eventDesc;
-    let tags = this.form.value.eventTagCloud.split(/[ ,]+/);
+    let tags = (this.form.value.eventTagCloud = '').split(/[ ,]+/);
     let relLink = this.form.value.eventRelLink;
     let imgLink = this.form.value.eventImgLink;
 
@@ -65,16 +135,8 @@ export class AddEventComponent implements OnInit {
       alert('Missing Event Name');
       this.router.navigate(['/add-event']);
     }
-    else if (startPeriod.year < 0 || startPeriod.year === '') {
-      alert('Missing Year for Start Date');
-      this.router.navigate(['/add-event']);
-    }
-    else if (!startPeriod.era) {
-      alert('Missing Era from Start Date');
-      this.router.navigate(['/add-event']);
-    }
-    else if (!startPeriod.month) {
-      alert('Missing Month from Start Date');
+    else if (!startPeriod.year) {
+      alert('Missing Start Date');
       this.router.navigate(['/add-event']);
     }
     else {
@@ -85,8 +147,11 @@ export class AddEventComponent implements OnInit {
         action: 'Created on',
         timestamp: new Date(),
         submittedBy: this.user
+      }).then(data => {
+        alert('Event has been created'),
+          this.router.navigate(['/']);
       });
-      this.router.navigate(['/']);
+
     }
   }
 

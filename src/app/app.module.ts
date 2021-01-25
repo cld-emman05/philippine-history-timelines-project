@@ -12,8 +12,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AddArticleComponent } from './dashboard/modals/add-article/add-article.component';
 import { AddEventComponent } from './dashboard/modals/add-event/add-event.component';
 import { ReactiveFormsModule } from "@angular/forms";
-import { CKEditorModule } from 'ckeditor4-angular';
 import { EditEventComponent } from './dashboard/modals/edit-event/edit-event.component';
+import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
+import { MzdTimelineModule } from 'ngx-mzd-timeline';
+import { HorizontalComponent } from './main-timeline/horizontal/horizontal.component';
+import { VerticalComponent } from './main-timeline/vertical/vertical.component';
+
+
 
 @NgModule({
   declarations: [
@@ -24,15 +29,18 @@ import { EditEventComponent } from './dashboard/modals/edit-event/edit-event.com
     PageNotFoundComponent,
     AddArticleComponent,
     AddEventComponent,
-    EditEventComponent
+    EditEventComponent,
+    TextareaAutoresizeDirective,
+    HorizontalComponent,
+    VerticalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    CKEditorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MzdTimelineModule,
   ],
   providers: [
     Title
