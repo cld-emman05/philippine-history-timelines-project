@@ -17,6 +17,7 @@ import { TextareaAutoresizeDirective } from './textarea-autoresize.directive';
 import { MzdTimelineModule } from 'ngx-mzd-timeline';
 import { HorizontalComponent } from './main-timeline/horizontal/horizontal.component';
 import { VerticalComponent } from './main-timeline/vertical/vertical.component';
+import { SearchTagsComponent } from './search-tags/search-tags.component';
 
 
 
@@ -32,7 +33,8 @@ import { VerticalComponent } from './main-timeline/vertical/vertical.component';
     EditEventComponent,
     TextareaAutoresizeDirective,
     HorizontalComponent,
-    VerticalComponent
+    VerticalComponent,
+    SearchTagsComponent
   ],
   imports: [
     BrowserModule,

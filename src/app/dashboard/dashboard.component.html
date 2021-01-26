@@ -56,10 +56,10 @@
     <!-- Latest events and Twitter-->
     <div class="col-6">
         <div class="card my-3 ">
-            <div class="card-header ">
-                <h1 class="card-title ">Latest Events Posted</h1>
+            <div class="card-header">
+                <h1 class="card-title ">Latest Events Posted </h1>
                 <a class="btn btn-outline-primary float-end " routerLink="/add-event" *ngIf="auth.user | async as user">
-                    Add
+                    Add <span class="badge bg-dark">{{events.length}}</span>
                 </a>
             </div>
 
@@ -75,7 +75,10 @@
                                 *ngIf='event.endPeriod.day'>,</small>
                             {{event.endPeriod.year }}</h6>
 
-                        <h6 class="card-subtitle content" *ngIf="event.tags">Event Tag Cloud: {{event.tags}}
+                        <h6 class="card-subtitle content" *ngIf="event.tags">Event Tag Cloud: <a
+                                routerLink='/search-tags/{{tag}}'
+                                *ngFor='let tag of event.tags; let last = last'>{{tag}}
+                                <small *ngIf="event.tags.length > 0 && !last">, </small></a>
                         </h6>
                         <h6 class="card-subtitle content text-wrap" *ngIf="event.description">
                             Event Description: <i>{{event.description | slice: 0:95}}</i><a href='#'

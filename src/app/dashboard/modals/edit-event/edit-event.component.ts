@@ -17,7 +17,6 @@ export class EditEventComponent implements OnInit {
   startMonth: any;
   startYear: any;
   startDay: any;
-
   endMonth: any;
   endYear: any;
   endDay: any;
@@ -66,7 +65,6 @@ export class EditEventComponent implements OnInit {
               eventRelLink: data.get('relLink'),
               eventImgLink: data.get('imgLink'),
             })
-
             this.viewStartMonth(data.get('startPeriod.year'));
             this.getStartDay(data.get('startPeriod.month'));
             this.viewEndMonth(data.get('endPeriod.year'));
@@ -156,7 +154,13 @@ export class EditEventComponent implements OnInit {
     let name = this.form.value.eventName;
 
     let description = this.form.value.eventDesc;
-    let tags = (this.form.value.eventTagCloud = '').split(/[ ,]+/);
+    let tags: string[] = [];
+    this.form.value.eventTagCloud.split(/[,]+/).forEach((element: any) => {
+      tags.push(element.replace(/([a-z])([A-Z])/g, '$1-$2')    // get all lowercase letters that are near to uppercase ones
+        .replace(/[\s_.,]+/g, '-').replace('\\', '-').replace('\/', '-')                // replace all spaces and low dash
+        .toLowerCase())
+    });
+
     let relLink = this.form.value.eventRelLink;
     let imgLink = this.form.value.eventImgLink;
 

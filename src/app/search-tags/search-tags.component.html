@@ -1,5 +1,12 @@
-<h3>Main Timeline</h3>
-<i>{{events.length}} entries recorded</i>
+<div class="px-3">
+    <form class="row" [formGroup]='this.form'>
+        <h3 class="w-25">Search Tag</h3>
+        <input type='search' class="form-control w-25 ms-auto" placeholder="Search tag-name-here"
+            (input)='searchTagURL($event.target.value)' formControlName="searchBox">
+
+    </form>
+    <h6>{{events.length}} entries recorded <i *ngIf='tagURL'>for {{tagURL}}</i></h6>
+</div>
 
 <div class='row align-self-center m-3'>
     <mzd-timeline [alternateSide]='true' *ngFor="let event of events">
